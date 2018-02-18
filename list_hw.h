@@ -25,3 +25,31 @@ void destroyLink(link the_link);
 void setLinkItem(link the_link, Item value);
 
 void setLinkNext(link the_link, link next);
+
+/*  Note that these functions do not have all the security checks.
+E.g. not all the functions reading and setting members of a node pointer, 
+check that the node is not NULL  */
+
+Item getLinkItem(link the_link);
+
+link getLinkNext(link the_link);
+
+
+
+
+/* LIST  */
+
+// Creates and returns an empty list.
+list newList();
+
+void destroyList(list the_list);
+
+// Returns a pointer to the first node in the list.
+link getFirst(list the_list);
+
+// Uses the field variable.
+int getLength(list my_list);  
+
+// Iterates through list and counts nodes.
+int computeLength(list my_list);  
+
