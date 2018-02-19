@@ -53,3 +53,29 @@ int getLength(list my_list);
 // Iterates through list and counts nodes.
 int computeLength(list my_list);  
 
+
+/* Sets the data to empty (first is null, length is 0,...)
+ * It does NOT free any memory.
+ */ 
+void setEmpty(list the_list);
+
+
+// Inserts new_link to the specified list, at the position right after
+// the link called "previous".
+void insertLink(list my_list, link previous, link new_link);
+
+/* Inserts new_link to the beginning of the list. */
+void insertAtBeginning(list my_list, link new_link);
+
+// Removes from the list and returns the link coming AFTER link x. 
+// This function DOES NOT  remove the link x itself. 
+link removeNext(list my_list, link x);
+
+// Removes and returns the first node from the list.
+link removeFirst(list my_list);
+
+void printList(list my_list);
+
+void printListHoriz(list my_list);
+
+void printListHorizPointer(list my_list);
