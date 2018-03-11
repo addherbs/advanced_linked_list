@@ -13,3 +13,4 @@ void destroyLink(link the_link) {
         free(the_link);
     }
 }
+
