@@ -1,7 +1,5 @@
-
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "list_hw.h"
 
 struct node_struct {
@@ -343,3 +341,131 @@ int run_student_tests() {
     return;
 }
 
+void printListHorizPointer(list my_list) {
+    if (listIsNULL(my_list) == 1) {
+        return;
+    }
+
+
+    int i = 0;
+    int n = my_list->length;
+    link curr;
+    printf("\n List length = %d\nList items:    ", my_list->length);
+    for (i = 0, curr = my_list->first; (curr != NULL) && (i < n); curr = curr->next) {
+        printf("%-11d  ", curr->item);
+        i++;
+    }
+    printf("\n");
+    printf("List pointers: ");
+    for (i = 0, curr = my_list->first; (curr != NULL) && (i < n); curr = curr->next) {
+        printf("%p ", curr);
+        i++;
+    }
+    printf("\n");
+}
+
+void deleteOccurrences(list A, Item V) {
+    
+	if (listIsNULL(A) == 1) {
+        return;
+    }
+	int i = 0;
+    int n = A->length;
+	link curr, prev;
+	prev = A->first;
+	
+	for (i = 0, curr = A->first; (curr != NULL) && (i < n); curr = curr->next) {
+		int flag = 0;
+		if(curr->item == V){
+			// Delete the item and set previous to next and also free the link
+			
+			if(i == 0){
+				link first = A->first;
+				link second = A->first->next;
+				A->first = second;
+				destroyLink(first);
+			}else{
+				prev->next = curr->next;
+				i++;
+				flag = 1;
+			}
+		}
+		if(flag == 1){
+			prev = curr->next;
+		}else{
+			prev = curr;	
+		}
+		
+		
+		i++;
+    }
+	return;
+}
+
+
+list sublist(list A, list pos_list) {
+	
+	int currentPosition = 0;
+	if (listIsNULL(A) == 1) {
+        return;
+    }
+	
+	if (listIsNULL(pos_list) == 1) {
+        return;
+    }
+	int i = 0;
+    int pos_list_len = pos_list->length;
+	link curr;
+	
+	//Create a new List
+	list newLList = newList();
+	
+	for (i = 0, curr = pos_list->first; (curr != NULL) && (i < pos_list_len); curr = curr->next) {
+        
+		currentPosition = curr->item ;
+		int thisPostion = 0;
+		link mainListLink = A->first;
+		while (thisPostion != currentPosition){
+			mainListLink = getLinkNext(mainListLink);
+			thisPostion++;
+		}
+		int positionValue = getLinkItem(mainListLink);
+		
+		link p = newLink(positionValue, NULL);
+		insertLink(newLList, NULL, p);
+		
+		i++;
+    }
+	
+    return newLList;
+}
+
+
+// swaps the first and the third nodes
+void swapFirstThird(list A) {
+    
+	if(A->length == 1){
+		return;
+	}
+	else if(A->length == 2){
+		
+		link currentFirst = A->first;
+		A->first = getLinkNext(currentFirst);
+		A->first->next = currentFirst;
+		
+		currentFirst->next = NULL;
+		return;
+	}else{
+		
+		link currentFirst = A->first;
+		link second = currentFirst->next;
+		link third = second->next;
+		
+		A->first = third;
+		currentFirst->next = third->next;
+		third->next = second;
+		second->next = currentFirst;
+		
+	}
+	return;
+}
